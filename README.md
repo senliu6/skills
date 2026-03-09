@@ -12,13 +12,59 @@
 
 ## 使用方式
 
-### 在 Claude Code 中使用
+### 方式 1: Git Submodule（推荐）
 
-1. 将此仓库注册为插件市场
-2. 浏览并安装需要的技能
-3. 直接在对话中提及技能名称即可使用
+在你的项目中添加此技能库作为子模块：
 
-### 在 API 中使用
+```bash
+# 添加子模块
+git submodule add https://github.com/senliu6/skills.git .kiro/skills
+
+# 或添加到自定义路径
+git submodule add https://github.com/senliu6/skills.git skills
+
+# 更新子模块
+git submodule update --init --recursive
+```
+
+### 方式 2: 直接克隆
+
+```bash
+# 克隆到项目目录
+cd your-project
+git clone https://github.com/senliu6/skills.git .kiro/skills
+```
+
+### 方式 3: Steering 文件引用
+
+在你的项目 `.kiro/steering/` 目录中创建引用文件：
+
+```markdown
+---
+name: external-skills
+description: 引用外部技能库
+inclusion: always
+---
+
+# 外部技能引用
+
+使用以下技能时，参考：https://github.com/senliu6/skills
+
+- api-design: API 设计规范
+- code-review: 代码审查标准
+- test-generator: 测试生成
+- refactor-assistant: 重构建议
+```
+
+### 方式 4: 在 Claude Code 中使用
+
+如果你的技能库注册为插件：
+
+1. 打开 Claude Code
+2. 运行命令安装插件
+3. 在对话中直接提及技能名称
+
+### 方式 5: 通过 API 使用
 
 参考 [Skills API 文档](https://docs.anthropic.com/en/docs/build-with-claude/skills)
 
